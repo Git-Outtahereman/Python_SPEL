@@ -26,10 +26,13 @@ font = pygame.font.SysFont(None, 32)
 
 # Score and timer
 score_value = 0
+scoreb_value = 0
 
 # Text positions
 textX = 10
 textY = 10
+text2X = 10
+text2Y = 30
 
 tijdX = 700
 tijdY = 10
@@ -38,6 +41,10 @@ tijdY = 10
 def show_score(x, y):
     score = font.render("Score : " + str(score_value), True, PURPLE)
     screen.blit(score, (x, y))
+
+def show_scoreb(x, y):
+    scoreb = font.render("Score blauw : " + str(scoreb_value), True, PURPLE)
+    screen.blit(scoreb, (x, y))
 
 # Function to show time
 def show_tijd(x, y):
@@ -124,7 +131,11 @@ while running:
 
     # Show score and time
     show_score(textX, textY)
+    show_scoreb(text2X, text2Y)
     show_tijd(tijdX, tijdY)
+
+
+    
 
     # Update the display
     pygame.display.update()
