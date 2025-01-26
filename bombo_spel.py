@@ -16,7 +16,7 @@ PURPLE = (255, 0, 255)
 
 # Set up the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Screen Loop Example")
+pygame.display.set_caption("Bombo bingbob")
 
 # Clock for controlling the frame rate
 clock = pygame.time.Clock()
