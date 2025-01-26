@@ -12,6 +12,8 @@ SCREEN_HEIGHT = 600
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
+PURPLE = (255, 0, 255)
+
 # Set up the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Screen Loop Example")
@@ -19,37 +21,40 @@ pygame.display.set_caption("Screen Loop Example")
 # Clock for controlling the frame rate
 clock = pygame.time.Clock()
 
-
-#score vooral van https://www.youtube.com/watch?app=desktop&v=Fp1dudhdX8k&t=0s
+# Font for score and time
 font = pygame.font.SysFont(None, 32)
 
+# Score and timer
 score_value = 0
-timeboard = 0
 
+# Text positions
 textX = 10
 textY = 10
 
 tijdX = 700
 tijdY = 10
-def show_score(x,y):
-    score = font.render("Score : " + str(score_value), True, (255, 0, 255))
-    screen.blit(score, (x,y))
-    
-#tijd
-    am_ticks = 0
-def show_tijd(x,y):
-    tijd = font.render("tijd : " + str(am_ticks), True, (255, 0, 255))
-    screen.blit(tijd, (x,y))
+
+# Function to show score
+def show_score(x, y):
+    score = font.render("Score : " + str(score_value), True, PURPLE)
+    screen.blit(score, (x, y))
+
+# Function to show time
+def show_tijd(x, y):
+    tijd = font.render("Time : " + str(int(pygame.time.get_ticks() / 1000)), True, PURPLE)
+    screen.blit(tijd, (x, y))
+
 # Player setup
 player_size = 50
 player_x = SCREEN_WIDTH // 3
 player_y = SCREEN_HEIGHT // 2
 player_speed = 10
 
+# Bombo setup
 bombo_size = 100
 bombo_x = SCREEN_WIDTH // 1.5
 bombo_y = SCREEN_HEIGHT // 2
-bombo_speed = 5
+bombo_speed = 7
 
 # Main game loop
 running = True
@@ -59,7 +64,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # Key handling
+    # Key handling for player
     keys = pygame.key.get_pressed()
     if keys[pygame.K_a]:
         player_x -= player_speed
@@ -69,8 +74,8 @@ while running:
         player_y -= player_speed
     if keys[pygame.K_s]:
         player_y += player_speed
-        
-    keys = pygame.key.get_pressed()
+
+    # Key handling for bombo
     if keys[pygame.K_LEFT]:
         bombo_x -= bombo_speed
     if keys[pygame.K_RIGHT]:
@@ -80,7 +85,7 @@ while running:
     if keys[pygame.K_DOWN]:
         bombo_y += bombo_speed
 
-    # Screen loop logic
+    # Screen loop logic for player
     if player_x > SCREEN_WIDTH:
         player_x = 0 - player_size  # Reappear on the left
     elif player_x < 0 - player_size:
@@ -89,7 +94,8 @@ while running:
         player_y = 0 - player_size  # Reappear on the top
     elif player_y < 0 - player_size:
         player_y = SCREEN_HEIGHT  # Reappear on the bottom
-    
+
+    # Screen loop logic for bombo
     if bombo_x > SCREEN_WIDTH:
         bombo_x = 0 - bombo_size  # Reappear on the left
     elif bombo_x < 0 - bombo_size:
@@ -99,26 +105,34 @@ while running:
     elif bombo_y < 0 - bombo_size:
         bombo_y = SCREEN_HEIGHT  # Reappear on the bottom
 
+    # Create Rect objects for collision detection
+    player_rect = pygame.Rect(player_x, player_y, player_size, player_size)
+    bombo_rect = pygame.Rect(bombo_x, bombo_y, bombo_size, bombo_size)
+
+    # Collision detection
+    if player_rect.colliderect(bombo_rect):
+        score_value += 1  # Increase score by 1
+        bombo_x = SCREEN_WIDTH // 1.5
+        bombo_y = SCREEN_HEIGHT // 2
+        player_x = SCREEN_WIDTH // 3
+        player_y = SCREEN_HEIGHT // 2
 
     # Drawing everything
     screen.fill(WHITE)
-    pygame.draw.rect(screen, BLUE, (player_x, player_y, player_size, player_size))
-    pygame.draw.rect(screen, RED, (bombo_x, bombo_y, bombo_size, bombo_size))
-    
-    #score laten zien
+    pygame.draw.rect(screen, BLUE, player_rect)
+    pygame.draw.rect(screen, RED, bombo_rect)
+
+    # Show score and time
     show_score(textX, textY)
-    
-    #tijdbord
-    am_ticks = int(pygame.time.get_ticks()/1000)
     show_tijd(tijdX, tijdY)
-    
+
     # Update the display
     pygame.display.update()
 
-   
     # Control the frame rate
     clock.tick(60)
 
 # Quit Pygame
 pygame.quit()
 sys.exit()
+
