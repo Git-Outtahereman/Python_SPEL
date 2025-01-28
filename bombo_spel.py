@@ -46,10 +46,20 @@ def show_scoreb(x, y):
     scoreb = font.render("Score blauw : " + str(scoreb_value), True, PURPLE)
     screen.blit(scoreb, (x, y))
 
+#tijdzaken
+interval = 8
+laatstetijd = 0
+
+
 # Function to show time
 def show_tijd(x, y):
-    tijd = font.render("Time : " + str(int(pygame.time.get_ticks() / 1000)), True, PURPLE)
+    huidig = int(pygame.time.get_ticks() / 1000)
+    tijd = font.render("Time : " + str(huidig), True, PURPLE)
     screen.blit(tijd, (x, y))
+
+
+
+
 
 # Player setup
 player_size = 50
@@ -129,6 +139,13 @@ while running:
     pygame.draw.rect(screen, BLUE, player_rect)
     pygame.draw.rect(screen, RED, bombo_rect)
 
+
+    #score blauw en tijd
+    huidig = int(pygame.time.get_ticks() / 1000)
+    if (huidig - laatstetijd >= interval):
+        scoreb_value = scoreb_value + 1
+        laatstetijd = huidig
+    
     # Show score and time
     show_score(textX, textY)
     show_scoreb(text2X, text2Y)
