@@ -5,7 +5,7 @@ import sys
 pygame.init()
 
 # Screen dimensions
-SCREEN_WIDTH = 800
+SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 
 # Colors
@@ -33,13 +33,14 @@ textX = 10
 textY = 10
 text2X = 10
 text2Y = 30
-
-tijdX = 700
+tijdX = SCREEN_WIDTH - 120
 tijdY = 10
+dashX = SCREEN_WIDTH -220
+dashY = 30
 
 # Function to show score
 def show_score(x, y):
-    score = font.render("Score : " + str(score_value), True, PURPLE)
+    score = font.render("Score bombo : " + str(score_value), True, PURPLE)
     screen.blit(score, (x, y))
 
 def show_scoreb(x, y):
@@ -57,7 +58,10 @@ def show_tijd(x, y):
     tijd = font.render("Time : " + str(huidig), True, PURPLE)
     screen.blit(tijd, (x, y))
 
-
+def show_dash(x, y):
+    dashtimer =  int(bombo_dash_cool_timer / 60 )
+    dash = font.render("Dashcooldown : " + str(dashtimer), True, PURPLE)
+    screen.blit(dash, (x, y))
 
 
 
@@ -72,7 +76,13 @@ bombo_size = 100
 bombo_x = SCREEN_WIDTH // 1.5
 bombo_y = SCREEN_HEIGHT // 2
 bombo_speed = 7
-
+huidigBombo_speed = 7
+bombo_dash = 50
+bombo_dash_duur = 5
+bombo_dash_cool = 600
+bombo_dash_cool_timer = 0
+bombo_dash_timer = 0
+bombo_is_dashing = False
 # Main game loop
 running = True
 while running:
@@ -94,13 +104,13 @@ while running:
 
     # Key handling for bombo
     if keys[pygame.K_LEFT]:
-        bombo_x -= bombo_speed
+        bombo_x -= huidigBombo_speed
     if keys[pygame.K_RIGHT]:
-        bombo_x += bombo_speed
+        bombo_x += huidigBombo_speed
     if keys[pygame.K_UP]:
-        bombo_y -= bombo_speed
+        bombo_y -= huidigBombo_speed
     if keys[pygame.K_DOWN]:
-        bombo_y += bombo_speed
+        bombo_y += huidigBombo_speed
 
     # Screen loop logic for player
     if player_x > SCREEN_WIDTH:
@@ -121,6 +131,32 @@ while running:
         bombo_y = 0 - bombo_size  # Reappear on the top
     elif bombo_y < 0 - bombo_size:
         bombo_y = SCREEN_HEIGHT  # Reappear on the bottom
+
+
+    #dash mechanics
+     # Bombo snelheid aanpassen als hij aan het dashen is
+    if bombo_is_dashing:
+        huidigBombo_speed = bombo_dash
+    else:
+        huidigBombo_speed = bombo_speed
+        
+
+    # Dash activeren (Shift indrukken)
+    if keys[pygame.K_SPACE] and bombo_dash_cool_timer == 0:
+        bombo_is_dashing = True
+        bombo_dash_timer = bombo_dash_duur
+        bombo_dash_cool_timer = bombo_dash_cool  # Zet cooldown
+
+    # Dash-timer aftellen
+    if bombo_is_dashing:
+        if bombo_dash_timer > 0:
+            bombo_dash_timer -= 1
+    if bombo_dash_timer <= 0:
+        bombo_is_dashing = False
+
+    # Cooldown-timer aftellen
+    if bombo_dash_cool_timer > 0:
+        bombo_dash_cool_timer -= 1
 
     # Create Rect objects for collision detection
     player_rect = pygame.Rect(player_x, player_y, player_size, player_size)
@@ -150,9 +186,8 @@ while running:
     show_score(textX, textY)
     show_scoreb(text2X, text2Y)
     show_tijd(tijdX, tijdY)
+    show_dash(dashX, dashY)
 
-
-    
 
     # Update the display
     pygame.display.update()
