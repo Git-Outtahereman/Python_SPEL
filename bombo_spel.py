@@ -174,6 +174,10 @@ while running:
     bombo_rect = pygame.Rect(bombo_x, bombo_y, bombo_size, bombo_size)
     
     #powerup --------------------------------------------------------------------------------------
+    # Drawing everything
+    screen.fill(WHITE)
+    pygame.draw.rect(screen, BLUE, player_rect)
+    pygame.draw.rect(screen, RED, bombo_rect)
     
     if pwrup_cooldown_timer > 0:
         pwrup_cooldown_timer -= 1
@@ -213,10 +217,7 @@ while running:
         player_y = SCREEN_HEIGHT // 2
     
         
-    # Drawing everything
-    screen.fill(WHITE)
-    pygame.draw.rect(screen, BLUE, player_rect)
-    pygame.draw.rect(screen, RED, bombo_rect)
+    
     
     
     
