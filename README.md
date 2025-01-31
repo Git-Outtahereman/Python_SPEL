@@ -47,5 +47,8 @@ Bombo Bingbob is een eenvoudig maar leuk 2D-spel gemaakt met Pygame. Het spel dr
 
 Veel plezier met spelen!
 
+voor feedback vul het formulier in
+https://docs.google.com/forms/d/e/1FAIpQLSdoSxe1JkzdrJurOkEOKuLHegwd5GJ-75GNn64hwxgWcLpXaA/viewform?usp=preview 
+
 
 Mathijs bakker en Declan Tijms
