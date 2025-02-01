@@ -1,7 +1,55 @@
-# Tag
-<br>
-In dit spel moet het rode vierkant het blauwe vierkant raken om een punt te krijgen<br>
-het blauwe vierkant krijgt een punt als je voor een bepaalde tijd wegrent zonder gepakt te worden<br>
-het blauwe vierkant wordt bestuurd met w a s d en het rode vierkant met de pijltjestoetsen
+# Bombo Bingbob
+
+Bombo Bingbob is een eenvoudig maar leuk 2D-spel gemaakt met Pygame. Het spel draait om twee spelers: een rode (Bombo) en een blauwe. De rode speler probeert de blauwe speler te vangen, terwijl de blauwe speler probeert te overleven en punten te verdienen.
+
+## Doel van het Spel
+- De rode speler (Bombo) probeert de blauwe speler te raken om punten te scoren.
+- De blauwe speler probeert zo lang mogelijk te overleven en verdient elke 8 seconden een punt.
+  
+
+## Besturing
+### Blauwe Speler (Ontwijk de rode speler!)
+- `W` - Beweeg omhoog
+- `A` - Beweeg naar links
+- `S` - Beweeg omlaag
+- `D` - Beweeg naar rechts
+
+### Rode Speler (Vang de blauwe speler!)
+- `Pijl omhoog` - Beweeg omhoog
+- `Pijl omlaag` - Beweeg omlaag
+- `Pijl links` - Beweeg naar links
+- `Pijl rechts` - Beweeg naar rechts
+- `Spatiebalk` - Dash (snelle sprint, met cooldown)
+
+## Power-Ups
+- **Groene vierkantjes**: Wanneer de blauwe speler een groene power-up oppakt:
+  - De blauwe speler wordt kleiner (20x20 in plaats van 50x50) en daardoor moeilijker te raken.
+  - De power-up werkt gedurende enkele seconden en verdwijnt dan.
+  - De power-up verschijnt opnieuw na een cooldown-periode.
+
+## Score Systeem
+- **Bombo's Score**: Verhoogt elke keer dat de rode speler de blauwe speler vangt.
+- **Blauwe Score**: Verhoogt automatisch met 1 punt elke 8 seconden als de blauwe speler nog leeft.
+
+## Extra mechanics
+- Beide spelers kunnen aan de randen van het scherm naar de andere kant teleporteren.
+- De rode speler heeft een dash-move om sneller te bewegen, maar deze heeft een cooldown.
+
+## Installatie en Uitvoering
+1. Zorg ervoor dat je Python en Pygame hebt geïnstalleerd:
+   ```sh
+   pip install pygame
+   ```
+2. Voer het spel uit met:
+   ```sh
+   python main.py
+   ```
+
+Veel plezier met spelen!
+
+## Feedback
+voor feedback vul het formulier in
+https://docs.google.com/forms/d/e/1FAIpQLSdoSxe1JkzdrJurOkEOKuLHegwd5GJ-75GNn64hwxgWcLpXaA/viewform?usp=preview 
+
 
 Mathijs bakker en Declan Tijms
