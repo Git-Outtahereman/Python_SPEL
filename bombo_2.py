@@ -15,7 +15,7 @@ BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 PURPLE = (255, 0, 255)
 GREEN = (0, 255, 0)
-
+BLACK = (0, 0, 0)
 # Set up the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Bombo bingbob")
@@ -253,15 +253,25 @@ def GameLoop():
     
         if score_value >= 10:
             gameOver=True
-            winner="rode speler"
+            winner="De rode speler heeft gewonnen"
         elif scoreb_value >= 10:
             gameOver=True
-            winner="blauwe speler"
+            winner="De blauwe speler heeft gewonnen"
         while gameOver==True:
             screen.fill(WHITE)
+            text = font.render(winner, True, BLACK)
+            text_rect = text.get_rect(center=(500, 300))
+            screen.blit(text, text_rect)
+            
+            #restart tekst
+            restart_text = font.render("Druk op R om opnieuw te starten", True, BLACK)
+            restart_rect = restart_text.get_rect(center=(500, 350))
+            screen.blit(restart_text, restart_rect)
             
             
             pygame.display.update()
+            
+            
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_r:
