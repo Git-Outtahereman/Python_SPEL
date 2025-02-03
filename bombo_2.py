@@ -1,7 +1,7 @@
 import pygame
 import sys
 import random
-
+import math
 # Initialize Pygame
 pygame.init()
 
@@ -52,13 +52,20 @@ def GameLoop():
     pwrupX = random.randint(100 , SCREEN_WIDTH-100)
     pwrupY = random.randint(50, SCREEN_HEIGHT-100)
     pwrupDur = 240
+    bomboupDur = 420
     pwrupActive = False
+    pwrupBombo = False
     Tijd = 0
     Tijdd = 0
     Tickk = 0
+    WallX = SCREEN_WIDTH // 2
+    WallY = SCREEN_HEIGHT // 4
+    WallSizeX = 20
+    WallSizeY = 300
+    
     
     def show_dash(x, y):
-        dashtimer =  int(bombo_dash_cool_timer / 60 )
+        dashtimer =  math.ceil(bombo_dash_cool_timer / 60 )
         dash = font.render("Dashcooldown : " + str(dashtimer), True, PURPLE)
         screen.blit(dash, (x, y))
         
@@ -88,11 +95,12 @@ def GameLoop():
     huidigBombo_speed = 7
     bombo_dash = 50
     bombo_dash_duur = 5
-    bombo_dash_cool = 600
+    bombo_dash_cool = 300
     bombo_dash_cool_timer = 0
     bombo_dash_timer = 0
     bombo_is_dashing = False
     running = True
+    
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -176,7 +184,13 @@ def GameLoop():
         if bombo_dash_cool_timer > 0:
             bombo_dash_cool_timer -= 1
         
+        if bombo_dash_cool_timer == 0:
+            kleur1 = (139,0,0)
+        if bombo_dash_cool_timer > 0:
+            kleur1 = RED
+            
         # Create Rect objects for collision detection
+        Wall_rect = pygame.Rect(WallX, WallY, WallSizeX, WallSizeY)
         pwrup_rect = pygame.Rect(pwrupX, pwrupY, pwrupSize, pwrupSize)
         player_rect = pygame.Rect(player_x, player_y, player_size, player_size)
         bombo_rect = pygame.Rect(bombo_x, bombo_y, bombo_size, bombo_size)
@@ -185,7 +199,7 @@ def GameLoop():
         # Drawing everything
         screen.fill(WHITE)
         pygame.draw.rect(screen, BLUE, player_rect)
-        pygame.draw.rect(screen, RED, bombo_rect)
+        pygame.draw.rect(screen, kleur1, bombo_rect)
         
         if pwrup_cooldown_timer > 0:
             pwrup_cooldown_timer -= 1
@@ -206,14 +220,33 @@ def GameLoop():
             pwrup_cooldown_timer = pwrup_cooldown
             pwrupActive = True
         
+        if pwrup_cooldown_timer <= 0 and pwrup_rect.colliderect(bombo_rect):
+            pwrupX = random.randint(100 , SCREEN_WIDTH-100)
+            pwrupY = random.randint(50, SCREEN_HEIGHT-100)
+            pwrup_cooldown_timer = pwrup_cooldown
+            pwrupBombo = True
+            
         if pwrupActive:
             player_size = 20
             pwrupDur -= 1
             if pwrupDur <= 0:
                 pwrupActive = False
                 player_size = 50
-                pwrupDur = 120
+                pwrupDur = 240
         
+        if pwrupBombo:
+            pygame.draw.rect(screen, BLACK, Wall_rect)
+            bomboupDur -= 1
+            if bomboupDur <= 0:
+                pwrupBombo = False
+                bomboupDur = 420
+                
+        if pwrupBombo and player_rect.colliderect(Wall_rect):
+            score_value += 1  # Increase score by 1
+            bombo_x = SCREEN_WIDTH // 1.5
+            bombo_y = SCREEN_HEIGHT // 2
+            player_x = SCREEN_WIDTH // 3
+            player_y = SCREEN_HEIGHT // 2
         
 
         # Collision detection
