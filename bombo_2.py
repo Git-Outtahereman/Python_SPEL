@@ -247,6 +247,7 @@ def GameLoop():
             bombo_y = SCREEN_HEIGHT // 2
             player_x = SCREEN_WIDTH // 3
             player_y = SCREEN_HEIGHT // 2
+            pwrupBombo = False
         
 
         # Collision detection
