@@ -67,11 +67,11 @@ def show_dash(x, y):
 
 #powerup setup
 pwrupSize = 10
-pwrup_cooldown = 1200
-pwrup_cooldown_timer = 1200
+pwrup_cooldown = 1020
+pwrup_cooldown_timer = 1020
 pwrupX = random.randint(100 , SCREEN_WIDTH-100)
 pwrupY = random.randint(50, SCREEN_HEIGHT-100)
-pwrupDur = 240
+pwrupDur = 300
 pwrupActive = False
 
 # Player setup
@@ -204,11 +204,11 @@ while running:
         if pwrupDur <= 0:
             pwrupActive = False
             player_size = 50
-            pwrupDur = 120
+            pwrupDur = 300
     
     
 
-    # Collision detection
+    # Collision detection ----------------------------------------------------------------------------------
     if player_rect.colliderect(bombo_rect):
         score_value += 1  # Increase score by 1
         bombo_x = SCREEN_WIDTH // 1.5
@@ -217,10 +217,6 @@ while running:
         player_y = SCREEN_HEIGHT // 2
     
         
-    
-    
-    
-    
 
 
     #score blauw en tijd

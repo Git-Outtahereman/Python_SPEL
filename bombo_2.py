@@ -26,8 +26,6 @@ clock = pygame.time.Clock()
 # Font for score and time
 font = pygame.font.SysFont(None, 32)
 
-# Score and timer
-
 
 # Text positions
 textX = 10
@@ -38,21 +36,6 @@ tijdX = SCREEN_WIDTH - 120
 tijdY = 10
 dashX = SCREEN_WIDTH -220
 dashY = 30
-
-# Function to show score
-
-
-#tijdzaken
-
-
-
-# Function to show time
-def show_tijd(x, y):
-    huidig = int(pygame.time.get_ticks() / 1000)
-    tijd = font.render("Time : " + str(huidig), True, PURPLE)
-    screen.blit(tijd, (x, y))
-
-
 
 
 # Main game loop
@@ -70,6 +53,9 @@ def GameLoop():
     pwrupY = random.randint(50, SCREEN_HEIGHT-100)
     pwrupDur = 240
     pwrupActive = False
+    Tijd = 0
+    Tijdd = 0
+    Tickk = 0
     
     def show_dash(x, y):
         dashtimer =  int(bombo_dash_cool_timer / 60 )
@@ -83,6 +69,10 @@ def GameLoop():
     def show_scoreb(x, y):
         scoreb = font.render("Score blauw : " + str(scoreb_value), True, PURPLE)
         screen.blit(scoreb, (x, y))
+
+    def show_tijd(x, y):
+        tijd = font.render("Time : " + str(Tijd), True, PURPLE)
+        screen.blit(tijd, (x, y))
 
     # Player setup
     player_size = 50
@@ -103,6 +93,15 @@ def GameLoop():
     bombo_dash_timer = 0
     bombo_is_dashing = False
     running = True
+    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_q:
+                sys.exit()
+    
     while running:
         # Event handling
         for event in pygame.event.get():
@@ -226,23 +225,28 @@ def GameLoop():
             player_y = SCREEN_HEIGHT // 2
         
             
-        
-        
-        
-        
-
 
         #score blauw en tijd
-        huidig = int(pygame.time.get_ticks() / 1000)
-        if (huidig - laatstetijd >= interval):
+        Tickk = Tickk + 1
+        Tijdd = Tickk / 60
+        Tijd = int(Tijdd)
+        if (Tijdd % 8 == 0):
             scoreb_value = scoreb_value + 1
-            laatstetijd = huidig
         
         # Show score and time
         show_score(textX, textY)
         show_scoreb(text2X, text2Y)
         show_tijd(tijdX, tijdY)
         show_dash(dashX, dashY)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    sys.exit()
+                    
 
 
         # Update the display
@@ -253,18 +257,20 @@ def GameLoop():
     
         if score_value >= 10:
             gameOver=True
-            winner="De rode speler heeft gewonnen"
+            winner="BOMBO heeft gewonnen"
+            kleur = RED
         elif scoreb_value >= 10:
             gameOver=True
             winner="De blauwe speler heeft gewonnen"
+            kleur = BLUE
         while gameOver==True:
             screen.fill(WHITE)
-            text = font.render(winner, True, BLACK)
+            text = font.render(winner, True, kleur)
             text_rect = text.get_rect(center=(500, 300))
             screen.blit(text, text_rect)
             
             #restart tekst
-            restart_text = font.render("Druk op R om opnieuw te starten", True, BLACK)
+            restart_text = font.render("Druk op R om opnieuw te starten, of druk op Q om het spel af te sluiten", True, BLACK)
             restart_rect = restart_text.get_rect(center=(500, 350))
             screen.blit(restart_text, restart_rect)
             
@@ -276,6 +282,11 @@ def GameLoop():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_r:
                         GameLoop()
+                    if event.key == pygame.K_q:
+                        sys.exit()
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
 GameLoop()        
 
 # Quit Pygame
