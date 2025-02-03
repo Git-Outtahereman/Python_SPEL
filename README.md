@@ -5,6 +5,7 @@ Bombo Bingbob is een eenvoudig maar leuk 2D-spel gemaakt met Pygame. Het spel dr
 ## Doel van het Spel
 - De rode speler (Bombo) probeert de blauwe speler te raken om punten te scoren.
 - De blauwe speler probeert zo lang mogelijk te overleven en verdient elke 8 seconden een punt.
+- Je wint als je 10 punten haalt
   
 
 ## Besturing
@@ -15,10 +16,10 @@ Bombo Bingbob is een eenvoudig maar leuk 2D-spel gemaakt met Pygame. Het spel dr
 - `D` - Beweeg naar rechts
 
 ### Rode Speler (Vang de blauwe speler!)
-- `Pijl omhoog` - Beweeg omhoog
-- `Pijl omlaag` - Beweeg omlaag
-- `Pijl links` - Beweeg naar links
-- `Pijl rechts` - Beweeg naar rechts
+- `I` - Beweeg omhoog
+- `K` - Beweeg omlaag
+- `J` - Beweeg naar links
+- `L` - Beweeg naar rechts
 - `Spatiebalk` - Dash (snelle sprint, met cooldown)
 
 ## Power-Ups
@@ -48,7 +49,7 @@ Bombo Bingbob is een eenvoudig maar leuk 2D-spel gemaakt met Pygame. Het spel dr
 Veel plezier met spelen!
 
 ## Feedback
-voor feedback vul het formulier in
+Voor feedback vul het formulier in
 https://docs.google.com/forms/d/e/1FAIpQLSdoSxe1JkzdrJurOkEOKuLHegwd5GJ-75GNn64hwxgWcLpXaA/viewform?usp=preview 
 
 
