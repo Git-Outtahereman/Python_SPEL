@@ -36,21 +36,16 @@ text2X = 10
 text2Y = 30
 tijdX = SCREEN_WIDTH - 120
 tijdY = 10
-dashX = SCREEN_WIDTH -220
-dashY = 30
 
 # Function to show score
 
 
 #tijdzaken
-
-
-
-# Function to show time
 def show_tijd(x, y):
     huidig = int(pygame.time.get_ticks() / 1000)
     tijd = font.render("Time : " + str(huidig), True, PURPLE)
     screen.blit(tijd, (x, y))
+
 
 
 
@@ -71,10 +66,7 @@ def GameLoop():
     pwrupDur = 240
     pwrupActive = False
     
-    def show_dash(x, y):
-        dashtimer =  int(bombo_dash_cool_timer / 60 )
-        dash = font.render("Dashcooldown : " + str(dashtimer), True, PURPLE)
-        screen.blit(dash, (x, y))
+    
         
     def show_score(x, y):
         score = font.render("Score bombo : " + str(score_value), True, PURPLE)
@@ -94,8 +86,8 @@ def GameLoop():
     bombo_size = 100
     bombo_x = SCREEN_WIDTH // 1.5
     bombo_y = SCREEN_HEIGHT // 2
-    bombo_speed = 7
-    huidigBombo_speed = 7
+    bombo_speed = 8
+    huidigBombo_speed = 8
     bombo_dash = 50
     bombo_dash_duur = 5
     bombo_dash_cool = 600
@@ -159,7 +151,11 @@ def GameLoop():
         else:
             huidigBombo_speed = bombo_speed
             
-
+        if bombo_dash_cool_timer == 0:
+            kleur1=(139,0,0)
+        if bombo_dash_cool_timer > 0:
+            kleur1=RED
+        
         # Dash activeren (Shift indrukken)
         if keys[pygame.K_SPACE] and bombo_dash_cool_timer == 0:
             bombo_is_dashing = True
@@ -186,7 +182,7 @@ def GameLoop():
         # Drawing everything
         screen.fill(WHITE)
         pygame.draw.rect(screen, BLUE, player_rect)
-        pygame.draw.rect(screen, RED, bombo_rect)
+        pygame.draw.rect(screen, kleur1, bombo_rect)
         
         if pwrup_cooldown_timer > 0:
             pwrup_cooldown_timer -= 1
@@ -242,7 +238,7 @@ def GameLoop():
         show_score(textX, textY)
         show_scoreb(text2X, text2Y)
         show_tijd(tijdX, tijdY)
-        show_dash(dashX, dashY)
+        
 
 
         # Update the display
@@ -258,6 +254,7 @@ def GameLoop():
             gameOver=True
             winner="De blauwe speler heeft gewonnen"
         while gameOver==True:
+            #winnaar tekst
             screen.fill(WHITE)
             text = font.render(winner, True, BLACK)
             text_rect = text.get_rect(center=(500, 300))
@@ -269,12 +266,15 @@ def GameLoop():
             screen.blit(restart_text, restart_rect)
             
             
+            
+            
             pygame.display.update()
             
             
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_r:
+                        start_tijd = pygame.time.get_ticks()
                         GameLoop()
 GameLoop()        
 
