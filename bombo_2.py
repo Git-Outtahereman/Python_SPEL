@@ -1,6 +1,7 @@
 import pygame
 import sys
 import random
+import math
 
 # Initialize Pygame
 pygame.init()
@@ -36,6 +37,8 @@ text2X = 10
 text2Y = 30
 tijdX = SCREEN_WIDTH - 120
 tijdY = 10
+dashX = SCREEN_WIDTH -220
+dashY = 30
 
 # Function to show score
 
@@ -76,6 +79,11 @@ def GameLoop():
         scoreb = font.render("Score blauw : " + str(scoreb_value), True, PURPLE)
         screen.blit(scoreb, (x, y))
 
+    def show_dash(x, y):
+        dashtimer =  math.ceil(bombo_dash_cool_timer / 60)
+        dash = font.render("Dashcooldown : " + str(dashtimer), True, PURPLE)
+        screen.blit(dash, (x, y))
+        
     # Player setup
     player_size = 50
     player_x = SCREEN_WIDTH // 3
@@ -156,7 +164,7 @@ def GameLoop():
         if bombo_dash_cool_timer > 0:
             kleur1=RED
         
-        # Dash activeren (Shift indrukken)
+        # Dash activeren (Spatie indrukken)
         if keys[pygame.K_SPACE] and bombo_dash_cool_timer == 0:
             bombo_is_dashing = True
             bombo_dash_timer = bombo_dash_duur
@@ -238,7 +246,7 @@ def GameLoop():
         show_score(textX, textY)
         show_scoreb(text2X, text2Y)
         show_tijd(tijdX, tijdY)
-        
+        show_dash(dashX, dashY)
 
 
         # Update the display
