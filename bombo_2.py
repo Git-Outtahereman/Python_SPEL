@@ -47,8 +47,8 @@ def GameLoop():
     interval = 8
     laatstetijd = 0
     pwrupSize = 10
-    pwrup_cooldown = 300
-    pwrup_cooldown_timer = 300
+    pwrup_cooldown = 720 #12 seconden
+    pwrup_cooldown_timer = 720
     pwrupX = random.randint(100 , SCREEN_WIDTH-100)
     pwrupY = random.randint(50, SCREEN_HEIGHT-100)
     pwrupDur = 240
@@ -57,11 +57,11 @@ def GameLoop():
     pwrupBombo = False
     Tijd = 0
     Tijdd = 0
-    Tickk = 0
-    WallX = SCREEN_WIDTH // 2
-    WallY = SCREEN_HEIGHT // 6
+    Tickk = 0 
     WallSizeX = 20
     WallSizeY = 400
+    WallX = pwrupX
+    WallY = pwrupY - (WallSizeY / 2)
     
     
     def show_dash(x, y):
@@ -222,8 +222,6 @@ def GameLoop():
         
         if pwrup_cooldown_timer <= 0 and pwrup_rect.colliderect(bombo_rect):
             pwrupBombo = True
-            pwrupX = random.randint(100 , SCREEN_WIDTH-100)
-            pwrupY = random.randint(50, SCREEN_HEIGHT-100)
             pwrup_cooldown_timer = pwrup_cooldown
             
         if pwrupActive:
@@ -239,6 +237,10 @@ def GameLoop():
             bomboupDur -= 1
             if bomboupDur <= 0:
                 pwrupBombo = False
+                pwrupX = random.randint(100 , SCREEN_WIDTH-100)
+                pwrupY = random.randint(50, SCREEN_HEIGHT-100)
+                WallX = pwrupX
+                WallY = pwrupY - (WallSizeY / 2)
                 bomboupDur = 420
                 
         if pwrupBombo and player_rect.colliderect(Wall_rect):
