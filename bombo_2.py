@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 import math
+
 # Initialize Pygame
 pygame.init()
 
@@ -51,13 +52,13 @@ def GameLoop():
     pwrup_cooldown_timer = 720
     pwrupX = random.randint(100 , SCREEN_WIDTH-100)
     pwrupY = random.randint(50, SCREEN_HEIGHT-100)
-    pwrupDur = 240
-    bomboupDur = 420
+    pwrupDur = 240 #4 seconden
+    bomboupDur = 420 # 7 seconden
     pwrupActive = False
     pwrupBombo = False
-    Tijd = 0
-    Tijdd = 0
-    Tickk = 0 
+    Tijd = 0 # nodig voor tijd zichtbaar op scherm
+    Tijdd = 0 # nodig voor correct punten geven aan blauwe speler
+    Tickk = 0 # haalt ticks op
     WallSizeX = 20
     WallSizeY = 400
     WallX = pwrupX
@@ -65,7 +66,7 @@ def GameLoop():
     
     
     def show_dash(x, y):
-        dashtimer =  math.ceil(bombo_dash_cool_timer / 60 )
+        dashtimer =  math.ceil(bombo_dash_cool_timer / 60 ) # math.ceil om naar boven af te ronden voor correcte dashcooldown.
         dash = font.render("Dashcooldown : " + str(dashtimer), True, PURPLE)
         screen.blit(dash, (x, y))
         
@@ -98,7 +99,7 @@ def GameLoop():
     bombo_dash_cool = 300
     bombo_dash_cool_timer = 0
     bombo_dash_timer = 0
-    bombo_is_dashing = False
+    bombo_is_dashing = False # aanmaken van dash check en op false zetten zodat hij niet dasht
     running = True
     
     
@@ -116,7 +117,7 @@ def GameLoop():
             if event.type == pygame.QUIT:
                 running = False
 
-        # Key handling for player
+        # Besturing Speler (WASD)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
             player_x -= player_speed
@@ -127,7 +128,7 @@ def GameLoop():
         if keys[pygame.K_s]:
             player_y += player_speed
 
-        # Key handling for bombo
+        # Besturing Bombo (IJKL)
         if keys[pygame.K_j]:
             bombo_x -= huidigBombo_speed
         if keys[pygame.K_l]:
@@ -167,7 +168,7 @@ def GameLoop():
             huidigBombo_speed = bombo_speed
             
 
-        # Dash activeren (Shift indrukken)
+        # Dash activeren (spatie indrukken)
         if keys[pygame.K_SPACE] and bombo_dash_cool_timer == 0:
             bombo_is_dashing = True
             bombo_dash_timer = bombo_dash_duur
@@ -213,7 +214,7 @@ def GameLoop():
         else:
             player_size = 50
         
-        #powerup position
+        #powerup positie en colision check
         if pwrup_cooldown_timer <= 0 and pwrup_rect.colliderect(player_rect):
             pwrupX = random.randint(100 , SCREEN_WIDTH-100)
             pwrupY = random.randint(50, SCREEN_HEIGHT-100)
@@ -228,10 +229,14 @@ def GameLoop():
             player_size = 20
             pwrupDur -= 1
             if pwrupDur <= 0:
+                pwrupX = random.randint(100 , SCREEN_WIDTH-100)
+                pwrupY = random.randint(50, SCREEN_HEIGHT-100)
+                WallX = pwrupX
+                WallY = pwrupY - (WallSizeY / 2)
                 pwrupActive = False
                 player_size = 50
                 pwrupDur = 240
-        
+        #Bombo powerup muur
         if pwrupBombo:
             pygame.draw.rect(screen, BLACK, Wall_rect)
             bomboupDur -= 1
@@ -291,6 +296,7 @@ def GameLoop():
         # Control the frame rate
         clock.tick(60)
     
+        #Restart/winscherm
         if score_value >= 10:
             gameOver=True
             winner="BOMBO heeft gewonnen"
@@ -310,19 +316,18 @@ def GameLoop():
             restart_rect = restart_text.get_rect(center=(500, 350))
             screen.blit(restart_text, restart_rect)
             
-            
             pygame.display.update()
             
-            
             for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_r:
                         GameLoop()
                     if event.key == pygame.K_q:
                         sys.exit()
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                        sys.exit()
+                    
 GameLoop()        
 
 # Quit Pygame
