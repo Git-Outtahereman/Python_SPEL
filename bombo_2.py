@@ -17,6 +17,7 @@ RED = (255, 0, 0)
 PURPLE = (255, 0, 255)
 GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
+GREY = (160,160,160)
 # Set up the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Bombo bingbob")
@@ -37,6 +38,10 @@ tijdX = SCREEN_WIDTH - 120
 tijdY = 10
 dashX = SCREEN_WIDTH -220
 dashY = 30
+ScoreX = 0
+ScoreY = 0
+ScoreSizeX = SCREEN_WIDTH
+ScoreSizeY = 70
 
 
 # Main game loop
@@ -67,19 +72,19 @@ def GameLoop():
     
     def show_dash(x, y):
         dashtimer =  math.ceil(bombo_dash_cool_timer / 60 ) # math.ceil om naar boven af te ronden voor correcte dashcooldown.
-        dash = font.render("Dashcooldown : " + str(dashtimer), True, PURPLE)
+        dash = font.render("Dashcooldown : " + str(dashtimer), True, BLACK)
         screen.blit(dash, (x, y))
         
     def show_score(x, y):
-        score = font.render("Score bombo : " + str(score_value), True, PURPLE)
+        score = font.render("Score bombo : " + str(score_value), True, BLACK)
         screen.blit(score, (x, y))
 
     def show_scoreb(x, y):
-        scoreb = font.render("Score blauw : " + str(scoreb_value), True, PURPLE)
+        scoreb = font.render("Score blauw : " + str(scoreb_value), True, BLACK)
         screen.blit(scoreb, (x, y))
 
     def show_tijd(x, y):
-        tijd = font.render("Time : " + str(Tijd), True, PURPLE)
+        tijd = font.render("Time : " + str(Tijd), True, BLACK)
         screen.blit(tijd, (x, y))
 
     # Player setup
@@ -144,8 +149,8 @@ def GameLoop():
         elif player_x < 0 - player_size:
             player_x = SCREEN_WIDTH  # Reappear on the right
         if player_y > SCREEN_HEIGHT:
-            player_y = 0 - player_size  # Reappear on the top
-        elif player_y < 0 - player_size:
+            player_y = 70 - player_size  # Reappear on the top
+        elif player_y < 70 - player_size:
             player_y = SCREEN_HEIGHT  # Reappear on the bottom
 
         # Screen loop logic for bombo
@@ -154,8 +159,8 @@ def GameLoop():
         elif bombo_x < 0 - bombo_size:
             bombo_x = SCREEN_WIDTH  # Reappear on the right
         if bombo_y > SCREEN_HEIGHT:
-            bombo_y = 0 - bombo_size  # Reappear on the top
-        elif bombo_y < 0 - bombo_size:
+            bombo_y = 70 - bombo_size  # Reappear on the top
+        elif bombo_y < 70 - bombo_size:
             bombo_y = SCREEN_HEIGHT  # Reappear on the bottom
 
 
@@ -192,6 +197,7 @@ def GameLoop():
             
         # Create Rect objects for collision detection
         Wall_rect = pygame.Rect(WallX, WallY, WallSizeX, WallSizeY)
+        text_rect = pygame.Rect(ScoreX, ScoreY, ScoreSizeX, ScoreSizeY)
         pwrup_rect = pygame.Rect(pwrupX, pwrupY, pwrupSize, pwrupSize)
         player_rect = pygame.Rect(player_x, player_y, player_size, player_size)
         bombo_rect = pygame.Rect(bombo_x, bombo_y, bombo_size, bombo_size)
@@ -201,6 +207,7 @@ def GameLoop():
         screen.fill(WHITE)
         pygame.draw.rect(screen, BLUE, player_rect)
         pygame.draw.rect(screen, kleur1, bombo_rect)
+        
         
         if pwrup_cooldown_timer > 0:
             pwrup_cooldown_timer -= 1
@@ -265,7 +272,7 @@ def GameLoop():
             player_x = SCREEN_WIDTH // 3
             player_y = SCREEN_HEIGHT // 2
         
-            
+        pygame.draw.rect(screen, GREY, text_rect)
 
         #score blauw en tijd
         Tickk = Tickk + 1
