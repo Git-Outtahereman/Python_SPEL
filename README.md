@@ -58,11 +58,12 @@ Voor feedback vul het formulier in
 https://docs.google.com/forms/d/e/1FAIpQLSdoSxe1JkzdrJurOkEOKuLHegwd5GJ-75GNn64hwxgWcLpXaA/viewform?usp=preview 
 
 ## Evaluatie
-### Mathijs:
-### Declan:
+**Mathijs:**<br>
+**Declan:** 
+ik heb geleerd hoe je een gameloop maakt en hoe je collision detecteert in pygame. Ik heb ook feedback van gebruikers toegevoegd  aan onze game.
 
 
-
+## Makers van het spel
 
 
 Mathijs bakker en Declan Tijms
