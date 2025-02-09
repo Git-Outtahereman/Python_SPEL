@@ -22,9 +22,14 @@ Bombo Bingbob is een eenvoudig maar leuk 2D-spel gemaakt met Pygame. Het spel dr
 - `L` - Beweeg naar rechts
 - `Spatiebalk` - Dash (snelle sprint, met cooldown)
 
-## Power-Ups
-- **Groene vierkantjes**: Wanneer de blauwe speler een groene power-up oppakt:
+## Power-Ups **Groene vierkantjes**
+  - Wanneer de blauwe speler een groene power-up oppakt:
   - De blauwe speler wordt kleiner (20x20 in plaats van 50x50) en daardoor moeilijker te raken.
+  - De power-up werkt gedurende enkele seconden en verdwijnt dan.
+  - De power-up verschijnt opnieuw na een cooldown-periode.
+ 
+  - Wanneer de rode speler (bombo) een groene power-up oppakt:
+  - Er verschijnt een muur van in totaal 400 pixels waarvan aan de boven en onderkant van de powerup 200 ieder. Hier kan Bombo doorheen alleen de blauwe speler niet. Als de blauwe speler hem raakt krijgt bombo een punt en resetten Bombo en de blauwe speler.
   - De power-up werkt gedurende enkele seconden en verdwijnt dan.
   - De power-up verschijnt opnieuw na een cooldown-periode.
 
