@@ -23,14 +23,14 @@ GREY = (160,160,160)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Bombo bingbob")
 
-# klok voor framerate
+# klok voor framerate bron: https://www.pygame.org/docs/ref/time.html
 clock = pygame.time.Clock()
 
-# Font voor score en tijd
-font = pygame.font.SysFont(None, 32)
+# Font voor score en tijd bron: https://stackoverflow.com/questions/38001898/what-fonts-can-i-use-with-pygame-font-font
+font = pygame.font.SysFont(None, 32) 
 
 
-# Tekst positie
+# Tekst positie bron: https://www.youtube.com/watch?app=desktop&v=Fp1dudhdX8k&t=0s (Voor heel de score en tijd laten zien gebruikt.)
 textX = 10
 textY = 10
 text2X = 10
@@ -45,7 +45,7 @@ ScoreSizeX = SCREEN_WIDTH
 ScoreSizeY = 70
 
 
-# Gameloop voor spel
+# Gameloop voor spel. bron: https://youtu.be/juRZLrUkDtU?si=_JPhlu8V2ZDZdxVO
 def GameLoop():
     winner=""
     gameOver=False
@@ -265,7 +265,7 @@ def GameLoop():
             pwrupBombo = False
         
 
-        # Collision detection
+        # Collision detection. bron :https://youtu.be/BHr9jxKithk?si=Qk84tEEAYF9Ek4t0
         if player_rect.colliderect(bombo_rect):
             score_value += 1  # Score omhoog met 1
             bombo_x = SCREEN_WIDTH // 1.5
