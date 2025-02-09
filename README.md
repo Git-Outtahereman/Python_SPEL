@@ -58,7 +58,9 @@ Voor feedback vul het formulier in
 https://docs.google.com/forms/d/e/1FAIpQLSdoSxe1JkzdrJurOkEOKuLHegwd5GJ-75GNn64hwxgWcLpXaA/viewform?usp=preview 
 
 ## Evaluatie
-**Mathijs:**<br>
+**Mathijs:**
+Ik heb geleerd hoe je collision detecteerd en hoe je movement voor een player opsteld. Verder hoe je een player kan loopen door het scherm. Ook heb ik geleerd hoe je effectief een spel kan testen en feedback kan verwerken.
+<br>
 **Declan:** 
 ik heb geleerd hoe je een gameloop maakt en hoe je collision detecteert in pygame. Ik heb ook feedback van gebruikers toegevoegd  aan onze game.
 
