@@ -57,5 +57,21 @@ Veel plezier met spelen!
 Voor feedback vul het formulier in
 https://docs.google.com/forms/d/e/1FAIpQLSdoSxe1JkzdrJurOkEOKuLHegwd5GJ-75GNn64hwxgWcLpXaA/viewform?usp=preview 
 
+## Evaluatie
+**Mathijs:**
+Ik heb geleerd hoe je collision detecteerd en hoe je movement voor een player opsteld. Verder hoe je een player kan loopen door het scherm. Ook heb ik geleerd hoe je effectief een spel kan testen en feedback kan verwerken.
+<br>
+**Declan:** 
+ik heb geleerd hoe je een gameloop maakt en hoe je collision detecteert in pygame. Ik heb ook feedback van gebruikers toegevoegd  aan onze game.
+
+## Bronnen
+Collision: Coding With Russ. (2023, 5 maart). Collisions in PyGame - Beginner tutorial [Video]. YouTube. https://www.youtube.com/watch?v=BHr9jxKithk <br> <br>
+Gameloop: thenewboston. (2014b, november 13). PyGame (Python Game Development) Tutorial - 15 - Game over Functionality [Video]. YouTube. https://www.youtube.com/watch?v=juRZLrUkDtU <br> <br>
+Font: What fonts can I use with pygame.font.Font? (z.d.). Stack Overflow. https://stackoverflow.com/questions/38001898/what-fonts-can-i-use-with-pygame-font-font <br> <br>
+Tekst display: buildwithpython. (2019, 29 juli). Pygame Tutorial - 15 -  Adding Text and Displaying Score [Video]. YouTube. https://www.youtube.com/watch?v=Fp1dudhdX8k <br> <br>
+Andere dingen: Les en trial en error.
+
+## Makers van het spel
+
 
 Mathijs bakker en Declan Tijms
