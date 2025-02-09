@@ -57,5 +57,12 @@ Veel plezier met spelen!
 Voor feedback vul het formulier in
 https://docs.google.com/forms/d/e/1FAIpQLSdoSxe1JkzdrJurOkEOKuLHegwd5GJ-75GNn64hwxgWcLpXaA/viewform?usp=preview 
 
+## Evaluatie
+### Mathijs:
+### Declan:
+
+
+
+
 
 Mathijs bakker en Declan Tijms
