@@ -3,14 +3,14 @@ import sys
 import random
 import math
 
-# Initialize Pygame
+# Initialiseer Pygame
 pygame.init()
 
-# Screen dimensions
+# Scherm grootte
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 
-# Colors
+# kleuren
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
@@ -18,18 +18,19 @@ PURPLE = (255, 0, 255)
 GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 GREY = (160,160,160)
-# Set up the screen
+
+# pygame scherm
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Bombo bingbob")
 
-# Clock for controlling the frame rate
+# klok voor framerate
 clock = pygame.time.Clock()
 
-# Font for score and time
+# Font voor score en tijd
 font = pygame.font.SysFont(None, 32)
 
 
-# Text positions
+# Tekst positie
 textX = 10
 textY = 10
 text2X = 10
@@ -44,7 +45,7 @@ ScoreSizeX = SCREEN_WIDTH
 ScoreSizeY = 70
 
 
-# Main game loop
+# Gameloop voor spel
 def GameLoop():
     winner=""
     gameOver=False
@@ -117,12 +118,12 @@ def GameLoop():
                 sys.exit()
     
     while running:
-        # Event handling
+        # Event voor afsluiten
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        # Besturing Speler (WASD)
+        # Besturing Speler (WASD) zelf uitgevogeld met behulp van les over replit-play
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
             player_x -= player_speed
@@ -143,25 +144,25 @@ def GameLoop():
         if keys[pygame.K_k]:
             bombo_y += huidigBombo_speed
 
-        # Screen loop logic for player
+        # Screen loop bombo
         if player_x > SCREEN_WIDTH:
-            player_x = 0 - player_size  # Reappear on the left
+            player_x = 0 - player_size  # verschijn links van het scherm
         elif player_x < 0 - player_size:
-            player_x = SCREEN_WIDTH  # Reappear on the right
+            player_x = SCREEN_WIDTH  # verschijn rechts van het schrem
         if player_y > SCREEN_HEIGHT:
-            player_y = 70 - player_size  # Reappear on the top
+            player_y = 70 - player_size  # verschijn bovenkant van het scherm
         elif player_y < 70 - player_size:
-            player_y = SCREEN_HEIGHT  # Reappear on the bottom
+            player_y = SCREEN_HEIGHT  # verschijn onderkant van het scherm
 
-        # Screen loop logic for bombo
+        # Screen loop bombo
         if bombo_x > SCREEN_WIDTH:
-            bombo_x = 0 - bombo_size  # Reappear on the left
+            bombo_x = 0 - bombo_size  # Zelfde als player 
         elif bombo_x < 0 - bombo_size:
-            bombo_x = SCREEN_WIDTH  # Reappear on the right
+            bombo_x = SCREEN_WIDTH  # Zelfde als player 
         if bombo_y > SCREEN_HEIGHT:
-            bombo_y = 70 - bombo_size  # Reappear on the top
+            bombo_y = 70 - bombo_size  # Zelfde als player 
         elif bombo_y < 70 - bombo_size:
-            bombo_y = SCREEN_HEIGHT  # Reappear on the bottom
+            bombo_y = SCREEN_HEIGHT  # Zelfde als player 
 
 
         #dash mechanics---------------------------------------------------------------------------------------
@@ -195,7 +196,7 @@ def GameLoop():
         if bombo_dash_cool_timer > 0:
             kleur1 = RED
             
-        # Create Rect objects for collision detection
+        # maak vierkanten voor features op scherm
         Wall_rect = pygame.Rect(WallX, WallY, WallSizeX, WallSizeY)
         text_rect = pygame.Rect(ScoreX, ScoreY, ScoreSizeX, ScoreSizeY)
         pwrup_rect = pygame.Rect(pwrupX, pwrupY, pwrupSize, pwrupSize)
@@ -203,7 +204,7 @@ def GameLoop():
         bombo_rect = pygame.Rect(bombo_x, bombo_y, bombo_size, bombo_size)
         
         #powerup --------------------------------------------------------------------------------------
-        # Drawing everything
+        # Draw de dingen
         screen.fill(WHITE)
         pygame.draw.rect(screen, BLUE, player_rect)
         pygame.draw.rect(screen, kleur1, bombo_rect)
@@ -256,17 +257,17 @@ def GameLoop():
                 bomboupDur = 420
                 
         if pwrupBombo and player_rect.colliderect(Wall_rect):
-            score_value += 1  # Increase score by 1
-            bombo_x = SCREEN_WIDTH // 1.5
-            bombo_y = SCREEN_HEIGHT // 2
-            player_x = SCREEN_WIDTH // 3
-            player_y = SCREEN_HEIGHT // 2
+            score_value += 1  # score omhoog bij 1
+            bombo_x = SCREEN_WIDTH // 1.5 # reset positie
+            bombo_y = SCREEN_HEIGHT // 2 # reset positie
+            player_x = SCREEN_WIDTH // 3 # reset positie
+            player_y = SCREEN_HEIGHT // 2 # reset positie
             pwrupBombo = False
         
 
         # Collision detection
         if player_rect.colliderect(bombo_rect):
-            score_value += 1  # Increase score by 1
+            score_value += 1  # Score omhoog met 1
             bombo_x = SCREEN_WIDTH // 1.5
             bombo_y = SCREEN_HEIGHT // 2
             player_x = SCREEN_WIDTH // 3
@@ -281,7 +282,7 @@ def GameLoop():
         if (Tijdd % 8 == 0):
             scoreb_value = scoreb_value + 1
         
-        # Show score and time
+        # score en tijd laten zien
         show_score(textX, textY)
         show_scoreb(text2X, text2Y)
         show_tijd(tijdX, tijdY)
@@ -297,10 +298,10 @@ def GameLoop():
                     
 
 
-        # Update the display
+        # Display updaten
         pygame.display.update()
 
-        # Control the frame rate
+        # frame rate
         clock.tick(60)
     
         #Restart/winscherm
